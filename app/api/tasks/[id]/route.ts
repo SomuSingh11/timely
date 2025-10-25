@@ -5,8 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 type UpdateData = {
   title?: string;
-  description?: string | null; // Allows string or null
-  status?: Status; // Use the Prisma enum type
+  description?: string | null;
+  status?: Status;
 };
 
 // Get a specific task by ID for the authenticated user
@@ -16,6 +16,7 @@ export async function GET(
 ) {
   try {
     const session = await getAuthSession();
+    const paramsId = params.id;
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -23,7 +24,7 @@ export async function GET(
 
     const task = await prisma.task.findFirst({
       where: {
-        id: params.id,
+        id: paramsId,
         userId: session.user.id,
       },
       include: {
@@ -52,6 +53,7 @@ export async function DELETE(
 ) {
   try {
     const session = await getAuthSession();
+    const { id: paramsId } = await params;
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -59,7 +61,7 @@ export async function DELETE(
 
     const deletedTask = await prisma.task.findUnique({
       where: {
-        id: params.id,
+        id: paramsId,
         userId: session.user.id,
       },
     });
@@ -69,7 +71,7 @@ export async function DELETE(
     }
 
     await prisma.task.delete({
-      where: { id: params.id },
+      where: { id: paramsId },
     });
 
     return NextResponse.json(
@@ -92,6 +94,7 @@ export async function PATCH(
 ) {
   try {
     const session = await getAuthSession();
+    const { id: paramsId } = await params;
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -102,7 +105,7 @@ export async function PATCH(
 
     const existingTask = await prisma.task.findUnique({
       where: {
-        id: params.id,
+        id: paramsId,
         userId: session.user.id,
       },
     });
@@ -127,7 +130,7 @@ export async function PATCH(
 
     const task = await prisma.task.update({
       where: {
-        id: params.id,
+        id: paramsId,
       },
       data: updatedData,
     });
