@@ -9,6 +9,7 @@ export async function PATCH(
 ) {
   try {
     const session = await getAuthSession();
+    const { id: paramsId } = await params;
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -17,7 +18,7 @@ export async function PATCH(
     // Verify time log belongs to user and is active
     const timeLog = await prisma.timeLog.findUnique({
       where: {
-        id: params.id,
+        id: paramsId,
         userId: session.user.id,
       },
     });
@@ -44,7 +45,7 @@ export async function PATCH(
     // Update time log with end time and duration
     const updatedTimeLog = await prisma.timeLog.update({
       where: {
-        id: params.id,
+        id: paramsId,
       },
       data: {
         endTime,

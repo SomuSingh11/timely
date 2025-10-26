@@ -108,7 +108,6 @@ function TaskList({
   return (
     <div className="h-full w-full flex flex-col">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 grow overflow-hidden px-4 pb-4">
-        {/* Tasks Column - FIX THIS PART */}
         <div className="h-full overflow-y-auto pr-2">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 auto-rows-min pb-4 p-4">
             {tasks.map((task) => (

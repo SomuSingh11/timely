@@ -77,7 +77,6 @@ export function TaskCard({
 
   return (
     <div className="flex flex-col justify-between bg-white border border-gray-200 rounded-lg shadow-sm p-5 hover:shadow-md transition-all h-full">
-      {/* content */}
       {/* Task Header */}
       <div className="mb-4">
         <div className="flex items-start justify-between gap-3 mb-2">

@@ -204,7 +204,7 @@ export function DailySummary() {
 
           {/* Activity Log Tab Content */}
           <TabsContent value="activity" className="flex-1 min-h-0 mt-0">
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+            <div className="bg-white rounded-xl h-full w-full border border-gray-200 p-6 shadow-sm">
               {" "}
               {/* Added shadow */}
               <h2 className="text-lg font-semibold text-gray-900 mb-4">
@@ -227,8 +227,6 @@ export function DailySummary() {
                     >
                       {/* Left Side: Task Title & Time Range */}
                       <div className="flex-1 overflow-hidden mr-4">
-                        {" "}
-                        {/* Added overflow hidden */}
                         <h3
                           className="font-medium text-gray-900 text-sm truncate"
                           title={log.taskTitle}

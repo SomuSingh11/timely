@@ -74,7 +74,7 @@ export default function SignUp() {
         setError(
           "Account created, but automatic sign-in failed. Please log in."
         );
-        router.replace("/login");
+        router.replace("/signin");
         return;
       }
 
@@ -189,7 +189,7 @@ export default function SignUp() {
 
         <p className="text-center text-sm text-gray-600">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-600 hover:underline">
+          <a href="/signin" className="text-blue-600 hover:underline">
             Sign in
           </a>
         </p>
