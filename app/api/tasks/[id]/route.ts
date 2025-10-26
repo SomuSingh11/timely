@@ -12,11 +12,11 @@ type UpdateData = {
 // Get a specific task by ID for the authenticated user
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getAuthSession();
-    const paramsId = params.id;
+    const { id: paramsId } = await params;
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -49,7 +49,7 @@ export async function GET(
 // Delete a specific task by ID for the authenticated user
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getAuthSession();
@@ -90,7 +90,7 @@ export async function DELETE(
 // Update a specific task by ID for the authenticated user
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getAuthSession();

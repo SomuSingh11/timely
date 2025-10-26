@@ -180,7 +180,7 @@ export function TaskCard({
               onClick={onStopTimer}
               variant="destructive"
               size="sm"
-              className="flex items-center gap-2 px-4 py-2"
+              className="flex items-center gap-2 px-4 py-2 hover:cursor-pointer"
             >
               <Square size={14} fill="currentColor" />
               Stop Timer
