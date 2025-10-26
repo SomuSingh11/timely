@@ -30,7 +30,7 @@ export function TaskLogHeader({
                 Description
               </span>
               <p
-                className="text-sm text-gray-600 leading-normal mt-0.5 line-clamp-2"
+                className="text-sm text-gray-600 leading-normal mt-0.5"
                 title={taskDescription}
               >
                 {taskDescription}

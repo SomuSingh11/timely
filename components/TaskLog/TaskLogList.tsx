@@ -13,7 +13,7 @@ export function TaskLogList({
   elapsedTime,
 }: TaskLogListProps) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 h-full overflow-y-auto">
       <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
         Activity Log
       </h3>

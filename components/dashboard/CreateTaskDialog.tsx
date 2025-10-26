@@ -67,7 +67,10 @@ export function CreateTaskDialog({ onTaskCreated }: CreateTaskDialogProps) {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button className="flex items-center gap-2 hover:cursor-pointer">
+        <Button
+          className="flex items-center gap-2 hover:cursor-pointer border border-gray-300"
+          variant={"ghost"}
+        >
           <Plus size={16} />
           New Task
         </Button>

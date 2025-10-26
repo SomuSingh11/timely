@@ -107,10 +107,6 @@ function TaskList({
 
   return (
     <div className="h-full w-full flex flex-col">
-      <div className="px-4 py-4 pl-8">
-        <CreateTaskDialog onTaskCreated={onTaskUpdated} />
-      </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 grow overflow-hidden px-4 pb-4">
         {/* Tasks Column - FIX THIS PART */}
         <div className="h-full overflow-y-auto pr-2">

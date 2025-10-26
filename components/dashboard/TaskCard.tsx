@@ -76,7 +76,8 @@ export function TaskCard({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow">
+    <div className="flex flex-col justify-between bg-white border border-gray-200 rounded-lg shadow-sm p-5 hover:shadow-md transition-all h-full">
+      {/* content */}
       {/* Task Header */}
       <div className="mb-4">
         <div className="flex items-start justify-between gap-3 mb-2">
@@ -122,48 +123,38 @@ export function TaskCard({
           ) : (
             // --- Display View ---
             <>
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900 leading-tight">
+              <div className="flex-1 min-w-0">
+                {/* Title */}
+                <h3 className="text-lg font-semibold text-gray-900 truncate">
                   {task.title}
                 </h3>
+
+                {/* Description */}
                 {task.description && (
-                  <p className="text-sm text-gray-600 mt-1 leading-relaxed">
+                  <p className="text-sm text-gray-600 mt-1 line-clamp-3 leading-relaxed">
                     {task.description}
                   </p>
                 )}
-                <div className="flex flex-wrap items-center gap-3 mt-3">
-                  <span
-                    className={`text-xs font-medium px-3 py-1.5 rounded-full ${getStatusColor(
-                      task.status
-                    )}`}
-                  >
-                    {task.status.replace("_", " ")}
-                  </span>
-                  <div className="flex items-center gap-1.5 text-sm text-gray-600 bg-gray-50 px-3 py-1.5 rounded-full">
-                    <Clock size={14} className="text-gray-500" />
-                    <span className="font-medium">
-                      {/* {formatTime(task.totalTime)} */}
-                    </span>
-                  </div>
-                </div>
               </div>
-              {/* Edit/Delete Buttons in Display View */}
-              <div className="flex gap-1">
+
+              {/* Action Buttons */}
+              <div className="flex flex-col justify-start gap-2 ml-2">
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={handleEditToggle}
-                  className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors h-8 w-8"
-                  title="Edit task"
+                  className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 h-8 w-8"
+                  title="Edit Task"
                 >
                   <Edit2 size={16} />
                 </Button>
+
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={handleDelete}
-                  className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors h-8 w-8"
-                  title="Delete task"
+                  className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200 h-8 w-8"
+                  title="Delete Task"
                 >
                   <Trash2 size={16} />
                 </Button>
