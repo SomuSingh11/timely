@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Task, TimeLog } from "@/types";
 import { CreateTaskDialog } from "./CreateTaskDialog";
 import { TaskCard } from "./TaskCard";
-import { TaskLogList } from "../TaskLog/TaskLogList";
 import { TaskLogPanel } from "./TaskLogPanel";
 
 interface TaskListProps {
@@ -108,26 +107,40 @@ function TaskList({
 
   return (
     <div className="h-full w-full flex flex-col">
-      <div className="pl-16">
+      <div className="px-4 py-4 pl-8">
         <CreateTaskDialog onTaskCreated={onTaskUpdated} />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 grow overflow-hidden px-4 pb-4 h-full">
-        <div className="col-span-1 space-y-4 h-full overflow-y-auto pr-2 pt-4 ">
-          {tasks.map((task) => (
-            <div key={task.id} onClick={() => handleTaskClick(task.id)}>
-              <TaskCard
-                task={task}
-                isTimerActive={activeTimer?.id === task.id}
-                isAnyTimerActive={!!activeTimer?.id}
-                onStartTimer={onStartTimer}
-                onStopTimer={onStopTimer}
-                onTaskUpdate={handleTaskUpdate}
-                onDelete={handleTaskDelete}
-              />
-            </div>
-          ))}
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 grow overflow-hidden px-4 pb-4">
+        {/* Tasks Column - FIX THIS PART */}
+        <div className="h-full overflow-y-auto pr-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 auto-rows-min pb-4 p-4">
+            {tasks.map((task) => (
+              <div
+                key={task.id}
+                onClick={() => handleTaskClick(task.id)}
+                className={`cursor-pointer transition-all ${
+                  selectedTaskId === task.id
+                    ? "ring-2 ring-gray-800/15 ring-offset-0 rounded-lg"
+                    : "hover:shadow-lg"
+                }`}
+              >
+                <TaskCard
+                  task={task}
+                  isTimerActive={activeTimer?.taskId === task.id}
+                  isAnyTimerActive={!!activeTimer}
+                  onStartTimer={onStartTimer}
+                  onStopTimer={onStopTimer}
+                  onTaskUpdate={handleTaskUpdate}
+                  onDelete={handleTaskDelete}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-        <div>
+
+        {/* Logs Column */}
+        <div className="h-full overflow-hidden mt-4">
           <TaskLogPanel
             selectedTask={selectedTask || null}
             taskLogs={taskLogs}

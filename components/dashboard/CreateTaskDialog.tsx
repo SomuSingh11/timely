@@ -1,4 +1,3 @@
-// src/components/CreateTaskDialog.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -36,6 +35,7 @@ export function CreateTaskDialog({ onTaskCreated }: CreateTaskDialogProps) {
 
     if (!newTaskTitle.trim() || !newTaskDescription.trim()) {
       alert("Title and description are required");
+      setLoading(false);
       return;
     }
 

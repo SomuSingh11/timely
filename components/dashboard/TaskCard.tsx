@@ -31,7 +31,7 @@ export function TaskCard({
   const [editDescription, setEditDescription] = useState(
     task.description || ""
   );
-  const [isSubmitting, setIsSubmitting] = useState(false); // For disabling buttons during save
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleEditToggle = () => {
     if (!isEditing) {
@@ -148,7 +148,7 @@ export function TaskCard({
                 </div>
               </div>
               {/* Edit/Delete Buttons in Display View */}
-              <div className="flex gap-1 flex-shrink-0">
+              <div className="flex gap-1">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -173,9 +173,8 @@ export function TaskCard({
         </div>
       </div>
 
-      {/* Action Bar (Only show if not editing) */}
       {!isEditing && (
-        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-gray-100">
+        <div className="flex justify-between items-center gap-2 pt-3 border-t border-gray-100">
           <select
             value={task.status}
             onChange={(e) => handleStatusChange(e.target.value)}
@@ -210,7 +209,7 @@ export function TaskCard({
           )}
 
           {isAnyTimerActive && !isTimerActive && (
-            <span className="text-xs text-amber-600 bg-amber-50 px-3 py-1.5 rounded-full ml-auto">
+            <span className="text-xs text-amber-600 truncate bg-amber-50 px-3 py-1.5 rounded-full ml-auto">
               ⏱️ Another timer is active
             </span>
           )}

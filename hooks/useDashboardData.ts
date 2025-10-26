@@ -1,5 +1,3 @@
-// src/hooks/useDashboardData.ts
-
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -46,21 +44,29 @@ export function useDashboardData(): DashboardData {
 
   const fetchActiveTimer = useCallback(async () => {
     try {
-      const response = await fetch("/api/timelogs,active");
+      const response = await fetch("/api/time-logs/active");
+
       if (response.ok) {
-        const logs = await response.json();
-        const active = logs.find((log: TimeLog) => !log.endTime);
-        if (active) {
-          setActiveTimer(active);
-          const start = new Date(active.startTime).getTime();
+        const activeLog: TimeLog | null = await response.json();
+
+        if (activeLog) {
+          setActiveTimer(activeLog);
+          const start = new Date(activeLog.startTime!).getTime();
           setElapsedTime(Math.floor((Date.now() - start) / 1000));
         } else {
           setActiveTimer(null);
           setElapsedTime(0);
         }
+      } else {
+        console.error("Failed to fetch active timer status:", response.status);
+        setActiveTimer(null);
+        setElapsedTime(0);
       }
     } catch (error) {
       console.error("Error fetching active timer:", error);
+
+      setActiveTimer(null);
+      setElapsedTime(0);
     }
   }, []);
 
